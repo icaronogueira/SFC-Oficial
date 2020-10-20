@@ -1,0 +1,19 @@
+<div class="text-center">
+  <h3>Corregedoria Geral de Justiça do Estado do Amazonas</h3>
+  <h4>Sistema de Fiscalização de Cartórios</h4>
+  <h3>Módulo CGJ</h3>
+</div>
+
+<form>
+  <div class="form-group">
+    <label for="input-email">E-mail do TJAM: </label>
+    <input id="input-email" type="text" [(ngModel)]="nome" name="nome"><br/>
+  </div>
+  <div class="form-group">
+    <label for="input-senha">Senha :</label>
+    <input id="input-senha" type="password" [(ngModel)]="senha" name="senha"><br/>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit" (click)="login()">Entrar</button>
+  </div>
+</form>
