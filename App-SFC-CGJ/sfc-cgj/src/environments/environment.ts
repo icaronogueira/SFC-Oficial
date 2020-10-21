@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  sysConfig: {
+    ENDPOINT_LDAP_AUTH: "https://sistemas.tjam.jus.br/services/autenticador/api/v1"
+  }
 };
 
 /*
@@ -13,3 +16,4 @@ export const environment = {
  * because it will have performance impact when throw error
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
