@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = false;
 
   errorMessage: any;
+  showError:boolean=false;
 
   constructor(private _api: ApiService, private _auth: AuthService, private _router: Router) { }
 
@@ -23,16 +24,21 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form:NgForm) {
     console.log('Your form data: ', form.value);
-    this._api.postTypeRequest('user/login', form.value).subscribe((res: any) => {
+    this._api.postTypeRequest('oficiais/login', form.value).subscribe((res: any) => {
       if (res.status) {
         console.log(res);
-        this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-        this._auth.setDataInLocalStorage('token', res.token);
-        this._router.navigate(['']);
-      } else {
-
-      }
+        if (res.data.length==0) {
+          console.log("verificação correta");
+          this.showError=true;
+          this.errorMessage = "Email ou senha incorretos.";
+        } else {
+          this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
+          this._auth.setDataInLocalStorage('token', res.token);
+          this._router.navigate(['']);
+        }
+      } 
     }, err => {
+      this.showError=true;
       this.errorMessage = err['error'].message;
     });
   }

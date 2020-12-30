@@ -1,0 +1,54 @@
+<!-- <nav class="navbar navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand">sfc - módulo administrativo</a>
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="relatorios">Relatórios</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="operacao">Operação</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="manutencao">Manutenção</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="configuracao">Configuração</a></li>
+        </ul>
+    </div>
+</nav> -->
+
+<ul class="main-navigation" routerLinkActive="active">
+    <li>SFC - Módulo Administrativo</li>
+    <li>
+        <a href="#">Relatórios</a>
+        <ul>
+            <li><a routerLink="rel-pend-obg-evento">Pendentes Obrigação Evento</a></li>
+            <li><a routerLink="rel-pend-obg-periodo">Pendentes Obrigação Período</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">Operação</a>
+        <ul>
+            <li><a routerLink="op-inspeciona-obrigacao">Inspeciona Obrigação</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">Manutenção</a>
+        <ul>
+            <li><a routerLink="man-cartorios">Cartórios</a></li>
+            <li><a routerLink="man-obrigacoes">Obrigações</a></li>
+            <li><a routerLink="man-oficiais">Oficiais</a></li>
+            <li><a routerLink="man-cancela-evento-obrigacao">Cancela Evento de Obrigação</a></li>
+            <li><a routerLink="man-associa-oficiais-cartorios">Associa Oficiais -> Cartórios</a></li>
+            <li><a routerLink="man-associa-obrigacoes-cartorios">Associa Obrigações -> Cartórios</a></li>
+            <li><a routerLink="man-inclui-obrigacoes-anuais">Inclui Obrigações Anuais (1 ou todos)</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">Configuração</a>
+        <ul>
+            <li><a routerLink="config-usuarios-cgj">Usuários CGJ</a></li>
+            <li><a routerLink="config-email-evento-validado">E-mail Evento Validado</a></li>
+            <li><a routerLink="config-email-evento-rejeitado">E-mail Evento Rejeitado</a></li>
+            <li><a routerLink="config-configura-ano-corrente">Configura Ano Corrente</a></li>
+            <li><a routerLink="config-log-recupera-senha">Log Recupera Senha</a></li>
+        </ul>
+    </li>
+    
+</ul>
+
+
+<router-outlet></router-outlet>
