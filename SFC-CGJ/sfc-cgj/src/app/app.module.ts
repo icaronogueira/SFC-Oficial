@@ -23,6 +23,10 @@ import { ConfigEmailEventoValidadoComponent } from './components/config-email-ev
 import { ConfigEmailEventoRejeitadoComponent } from './components/config-email-evento-rejeitado/config-email-evento-rejeitado.component';
 import { ConfigConfiguraAnoCorrenteComponent } from './components/config-configura-ano-corrente/config-configura-ano-corrente.component';
 import { ConfigLogRecuperaSenhaComponent } from './components/config-log-recupera-senha/config-log-recupera-senha.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -49,7 +53,11 @@ import { ConfigLogRecuperaSenhaComponent } from './components/config-log-recuper
     AuthModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NoopAnimationsModule,
+    MDBBootstrapModule.forRoot(),
+    NgbModule,
+    Ng2SmartTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

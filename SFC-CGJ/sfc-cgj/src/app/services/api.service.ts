@@ -7,7 +7,7 @@ import {map} from 'rxjs/operators'
 })
 export class ApiService {
 
-  baseUrl = 'http://localhost:4000';
+  baseUrl = 'http://localhost:3000';
   ENDPOINT_LDAP_AUTH='https://sistemas.tjam.jus.br/services/autenticador/api/v1'
 
   constructor(private _http: HttpClient) { }
