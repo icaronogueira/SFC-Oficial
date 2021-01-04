@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators'
 
@@ -30,9 +30,16 @@ export class ApiService {
   }
 
   getTypeRequest(url:any) {
-    return this._http.get(`${this.baseUrl}${url}`).pipe(map(res => {
-      return res;
-    }));
+    return this._http.get(`${this.baseUrl}${url}`).subscribe(data => {
+      console.log("Resultado da requisição: " + data);
+      return data;
+    }, (err: HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        console.log("Client-side error occured");
+      } else {
+        console.log("Server-side error occured");
+      }
+    });
   }
 
   postTypeRequest(url:any, payload:any) {

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ServerDataSource } from 'ng2-smart-table';
+import { UsuarioCgjInterface } from 'src/app/interfaces/usuario-cgj-interface';
 
 @Component({
   selector: 'app-config-usuarios-cgj',
@@ -9,30 +9,53 @@ import { ServerDataSource } from 'ng2-smart-table';
 })
 export class ConfigUsuariosCGJComponent implements OnInit {
 
+  baseUrl = 'http://localhost:3000';
   settings = {
     columns: {
-      id: {
-        title: 'ID',
+      nome_usr: {
+        title: 'Nome',
+        filter: true,
+        editable: true,
+        addable: true
       },
-      albumId: {
-        title: 'Album',
+      situacao: {
+        title: 'Situação',
+        filter: true,
+        editable: true
       },
-      title: {
-        title: 'Title',
+      id_usr_cgj_tjam: {
+        title: 'Email',
+        filter: true,
+        editable: true
       },
-      url: {
-        title: 'Url',
+      more: {
+        title: '',
       },
     }
   };
   
-  source: ServerDataSource;
-
-  constructor(http: HttpClient) { 
-    this.source = new ServerDataSource(http, { endPoint: '' });
+  constructor(private http: HttpClient) { 
+    
   }
 
+
+  data: any= [];
+
   ngOnInit(): void {
+    
+    this.http.get<UsuarioCgjInterface[]>(`${this.baseUrl}/usuario-cgj`).subscribe(
+        data => {
+          this.data = data;
+          console.log(this.data);
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log("Client-side error occured.");
+        } else {
+          console.log("Server-side error occured.");
+        }
+      });
+
   }
 
 }
