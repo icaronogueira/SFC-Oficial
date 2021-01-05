@@ -37,7 +37,7 @@ const routerConfig: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routerConfig)],
+  imports: [RouterModule.forRoot(routerConfig, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
