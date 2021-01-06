@@ -1,1 +1,6 @@
-<p>config-email-evento-validado works!</p>
+<h3>Email - evento validado</h3>
+<div class="container">
+    <button (click)="saveDesign()">Salvar Modelo</button>
+    <email-editor (loaded)="editorLoaded($event)" #editor></email-editor>
+</div>
+  

@@ -25,14 +25,15 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {  //AJEITAR ESSE LOGIN
     console.log('Your form data : ', form.value);
     this.isLogin=true;
-   // this._api.ldapRequest(form.value.email, form.value.password).subscribe((res: any) => {
-       // console.log(res)
-        /* this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-        this._auth.setDataInLocalStorage('token', res.token);
-        this._router.navigate(['']); */
-    //}, err => {
-      // this.errorMessage = err['error'].message;
-    //});
+    // this._api.ldapRequest(form.value.email, form.value.password).subscribe((res: any) => {
+    //    console.log(res)
+    //     this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
+    //     this._auth.setDataInLocalStorage('token', res.token);
+    //     this._router.navigate(['']);
+    //     this.isLogin=true;
+    // }, err => {
+    //   this.errorMessage = err['error'].message;
+    // });
   }
 
   isUserLogin(){

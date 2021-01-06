@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>{{data.nome_usr}}</h1>
 <div mat-dialog-content>
 <div>
-    <div *ngIf="data.dt_inc"> Data de inclusão: {{data.dt_inc}} </div>
-    <div *ngIf="data.dt_inc">Incluído por: {{data.dt_inc}} <span *ngIf="data.ip_inc"> (IP  {{data.ip_inc}})</span></div>
+    <div *ngIf="data.dt_inc"> Data de inclusão: {{data.dt_inc | date:'dd/MM/yyy - hh:mm'}} </div>
+    <div *ngIf="data.usr_inc">Incluído por: {{data.usr_inc}} <span *ngIf="data.ip_inc"> (IP  {{data.ip_inc }})</span></div>
 </div>
 <div>
-    <div *ngIf="data.dt_alt"> Alterado em: {{data.dt_alt}}
+    <div *ngIf="data.dt_alt"> Alterado em: {{data.dt_alt | date:'dd/MM/yyy - hh:mm'}}
         <div *ngIf="data.usr_alt"> por {{data.usr_alt}} <span *ngIf="data.ip_alt">(IP {{data.ip_alt}})</span> </div>
     </div>
     <div *ngIf="data.qtde_alt">Alterado {{data.qtde_alt}} vezes.</div>
@@ -13,16 +13,16 @@
 
 <div>
     <div *ngIf="data.situacao==='I'">
-        <div *ngIf="data.dt_ina"> Inativado em: {{data.dt_ina}}
+        <div *ngIf="data.dt_ina"> Inativado em: {{data.dt_ina | date:'dd/MM/yyy - hh:mm' }}
             <div *ngIf="data.usr_ina"> por {{data.usr_ina}} <span *ngIf="data.ip_ina">(IP {{data.ip_ina}})</span> </div>
         </div>
     </div>
 </div>
 
     <div>
-        Fez login no sistema {{data.qtde_entrada}} vezes.
-        Última vez em {{data.dt_ult_entrada}} pelo IP {{data.ip_ult_entrada}}.
-        Fez logoff do sistema {{data.qtde_saida}} vezes.
-        Última vez em {{data.dt_ult_saida}} pelo IP {{data.ip_ult_saida}}.
+        Fez login no sistema {{data.qtde_entrada}} vezes. </div>
+        <div>Última vez em {{data.dt_ult_entrada | date:'dd/MM/yyy - hh:mm' }} pelo IP {{data.ip_ult_entrada}}.</div>
+        <div>Fez logoff do sistema {{data.qtde_saida}} vezes.</div>
+        <div>Última vez em {{data.dt_ult_saida | date:'dd/MM/yyy - hh:mm' }} pelo IP {{data.ip_ult_saida}}.
     </div>
 </div>

@@ -27,6 +27,7 @@
     "@theo4u/ng-alert": "^2.1.0",
     "@types/chart.js": "^2.9.29",
     "angular-bootstrap-md": "^10.1.1",
+    "angular-email-editor": "^0.7.1",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.3",
     "bootstrap-material-design": "^4.1.3",

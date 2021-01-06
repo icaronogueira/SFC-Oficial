@@ -29,6 +29,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { EmailEditorModule } from 'angular-email-editor';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { CommonModule } from '@angular/common';
     MDBBootstrapModule.forRoot(),
     NgbModule,
     Ng2SmartTableModule,
-    MatDialogModule
+    MatDialogModule,
+    EmailEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

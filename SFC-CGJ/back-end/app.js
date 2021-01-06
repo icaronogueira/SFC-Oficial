@@ -13,6 +13,8 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/usuarios-cjg.routes.js")(app);
+require("./app/routes/modelo-email.routes.js")(app);
+
 
 app.listen(3000, () => {
     console.log('listening on port 3000');

@@ -30,15 +30,23 @@ export class ConfigUsuariosCGJComponent implements OnInit {
         addable: true
       },
       situacao: {
-        title: 'Situação',
-        filter: true,
-        editable: true
+        title: 'Situação (Ativo/Inativo)',
+        type: 'html',
+        editor: {
+          type: 'list',
+          config: {
+            list: [{ value: 'A', title: 'Ativo' }, { value: 'I', title: 'Inativo' }]
+          }
+        }
       },
       id_usr_cgj_tjam: {
         title: 'Email',
         filter: true,
         editable: true
       }
+    },
+    add: {
+      confirmCreate: true
     }
   };
   
@@ -66,16 +74,50 @@ export class ConfigUsuariosCGJComponent implements OnInit {
 
   }
 
-  onCustom(event: any) {
+  onCustom(event: any) {  //mostra dialog com mais informações
+
+    event.data.dt_ult_entrada = event.data.dt_ult_entrada ? new Date(event.data.dt_ult_entrada) : null;
+    event.data.dt_ult_saida = event.data.dt_ult_saida ? new Date(event.data.dt_ult_saida) : null;
+    event.data.dt_inc = event.data.dt_inc ? new Date(event.data.dt_inc) : null;
+    event.data.dt_alt = event.data.dt_alt ? new Date(event.data.dt_alt) : null;
+    event.data.dt_ina = event.data.dt_ina ? new Date(event.data.dt_ina) : null;
+   
     if (event.action=='info') {
-      const dialogInfo = this.dialog.open(DialogDataExampleDialog, {data: event.data});
+      const dialogInfo = this.dialog.open(DialogDataExampleDialog, {
+        data: event.data
+      });
     }
   }
+
+  // addRecord(event:any) {
+  //   var data = {
+  //     "situacao": event.newData.situacao,
+  //     "id_usr_cgj_tjam": event.newData.id_usr_cgj_tjam,
+  //     "nome_usr": event.newData.nome_usr,
+  //     "qtde_entrada": 0,
+  //     "dt_ult_entrada": null,
+  //     "ip_ult_entrada": null,
+  //     "qtde_saida": 0,
+  //     "dt_ult_saida": null,
+  //     "ip_ult_saida": null,
+  //     "dt_inc": null,
+  //     "usr_inc": string,
+  //     "ip_inc": string,
+  //     "dt_alt": null,
+  //     "usr_alt": null,
+  //     "ip_alt": null,
+  //     "qtde_alt": 0,
+  //     "dt_ina": null,
+  //     "usr_ina": null,
+  //     "ip_ina": null 
+  //   }
+
+  // }
 
 }
 
 
-@Component({
+@Component({ //modal com mais informações
   selector: 'dialog-data-example-dialog',
   templateUrl: 'dialog-data-example-dialog.html',
 })
