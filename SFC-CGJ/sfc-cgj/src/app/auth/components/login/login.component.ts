@@ -12,14 +12,19 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   
-  isLogin: boolean = true; //mudar para false depois
+  isLogin: boolean = true; //depois mudar para false
   errorMessage:string='';
 
   constructor( private _api: ApiService, private _auth: AuthService, private _router:Router) {
   }
 
   ngOnInit() {
+    //Verifica se tem login
     this.isUserLogin();
+
+    //Salva inicialmente o ano corrente
+    let anoAtual=new Date().getFullYear();
+    this._auth.setDataInLocalStorage('ano-corrente',anoAtual);
   }
 
   onSubmit(form: NgForm) {  //AJEITAR ESSE LOGIN

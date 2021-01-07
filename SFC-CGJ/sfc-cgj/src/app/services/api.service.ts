@@ -13,12 +13,12 @@ export class ApiService {
   constructor(private _http: HttpClient) { }
 
   ldapRequest(login: any, senha: any){
-    return this._http.post('https://sistemas.tjam.jus.br/services/autenticador/api/v1/login', {
+    return this._http.post(`${this.ENDPOINT_LDAP_AUTH}/login`, {
       username: login,
       password: senha,
     }).pipe(map(res => {
       return res;
-    }))
+    }));
     /* .toPromise()
     .then(
       async () =>

@@ -1,1 +1,7 @@
-<p>config-configura-ano-corrente works!</p>
+<h1> Ano Corrente</h1>
+<div >
+    <select class="center-block" [(ngModel)]="anoSelecionado" >
+        <option *ngFor="let ano of anosArray">{{ano}}</option>
+    </select>
+    <button (click)="salvaAno()">Salvar</button>
+</div>
