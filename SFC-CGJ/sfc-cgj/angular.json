@@ -80,8 +80,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sfc-cgj:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "browserTarget": "sfc-cgj:build"
           },
           "configurations": {
             "production": {

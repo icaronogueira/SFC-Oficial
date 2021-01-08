@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   
-  isLogin: boolean = true; //depois mudar para false
+  isLogin: boolean = false; //depois mudar para false
   errorMessage:string='';
 
   constructor( private _api: ApiService, private _auth: AuthService, private _router:Router) {
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {  //AJEITAR ESSE LOGIN
     console.log('Your form data : ', form.value);
     this.isLogin=true;
+    this._auth.setDataInLocalStorage('userLogin',form.value.login);
     // this._api.ldapRequest(form.value.email, form.value.password).subscribe((res: any) => {
     //    console.log(res)
     //     this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));

@@ -1,8 +1,0 @@
-{
-    "https://sistemas.tjam.jus.br/": {
-        "target": "https://sistemas.tjam.jus.br/services/autenticador/api/v1/login",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true
-    }
-}

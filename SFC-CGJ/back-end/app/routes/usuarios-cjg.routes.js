@@ -11,11 +11,11 @@ module.exports = app => {
     app.get("/usuario-cgj/:usuario-cgj-id", usuariosCgj.findOne);
   
     // Update a UsuarioCGj with UsuarioCGjId
-    app.put("/usuario-cgj/:usuario-cgj-id", usuariosCgj.update);
+    app.put("/usuario-cgj", usuariosCgj.update);
   
     // Delete a UsuarioCGj with UsuarioCGjId
-    app.delete("/usuario-cgj/:usuario-cgj-id", usuariosCgj.delete);
+    app.delete("/usuario-cgj", usuariosCgj.delete);
   
     // Create a new UsuarioCGj
-    app.delete("/usuario-cgj", usuariosCgj.deleteAll);
+    // app.delete("/usuario-cgj", usuariosCgj.deleteAll);
   };

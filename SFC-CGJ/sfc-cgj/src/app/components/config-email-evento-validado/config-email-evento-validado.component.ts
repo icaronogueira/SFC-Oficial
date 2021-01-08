@@ -31,9 +31,9 @@ export class ConfigEmailEventoValidadoComponent implements OnInit {
       },
     (err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
-        console.log("Client-side error occured.");
+        alert("Client-side error occured.");
       } else {
-        console.log("Server-side error occured.");
+        alert("Server-side error occured.");
       }
     });
     // -------------------------------------------------
@@ -53,9 +53,9 @@ export class ConfigEmailEventoValidadoComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
+            alert("Client-side error occured.");
           } else {
-            console.log("Server-side error occured.");
+            alert("Server-side error occured.");
           }
         });
 

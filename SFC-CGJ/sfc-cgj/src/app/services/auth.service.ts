@@ -8,7 +8,7 @@ export class AuthService {
   constructor() { }
 
   getUserDetails() {
-    return localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '{}') : null;
+    return localStorage.getItem('userLogin') ? localStorage.getItem('userLogin')  : null;
   }
 
   setDataInLocalStorage(variableName: any, data: any) {

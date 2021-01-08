@@ -17,11 +17,12 @@ exports.create = (req, res) => {
       situacao : req.body.situacao,
       id_usr_cgj_tjam : req.body.id_usr_cgj_tjam,
       nome_usr : req.body.nome_usr,
-      qtd_entrada : 0,
+      qtde_entrada : 0,
+      qtde_saida: 0,
       dt_inc : moment().format('YYYY-MM-DD hh:mm:ss'),
       usr_inc : req.body.usr_inc,
       ip_inc : req.body.ip_inc,
-      qtd_alt:0
+      qtde_alt:0
     });
   
     // Save Customer in the database
@@ -72,19 +73,36 @@ exports.update = (req, res) => {
         message: "Content can not be empty!"
       });
     }
+
+    //editing a UsuarioCGJ
+    // const editUsuarioCGJ = new UsuarioCGj({
+    //   situacao : req.body.situacao,
+    //   id_usr_cgj_tjam : req.body.id_usr_cgj_tjam,
+    //   nome_usr : req.body.nome_usr,
+    //   dt_alt : moment().format('YYYY-MM-DD hh:mm:ss'),
+    //   usr_alt : req.body.usr_inc,
+    //   ip_alt : req.body.ip_inc,
+    // });
   
     UsuarioCGj.updateById(
-      req.params.usuario-cgj-id,
-      req.params.field, req.params.value,
+      req.query.id_usr_cgj,
+      {
+        situacao : req.body.situacao,
+        id_usr_cgj_tjam : req.body.id_usr_cgj_tjam,
+        nome_usr : req.body.nome_usr,
+        dt_alt : moment().format('YYYY-MM-DD hh:mm:ss'),
+        usr_alt : req.body.usr_alt,
+        ip_alt : req.body.ip_alt,
+      },
       (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found UsuarioCGj with id ${req.params.usuario-cgj-id}.`
+              message: `Not found UsuarioCGj with id ${req.query.id_usr_cgj}.`
             });
           } else {
             res.status(500).send({
-              message: "Error updating UsuarioCGj with id " + req.params.usuario-cgj-id
+              message: "Error updating UsuarioCGj with id " + req.query.id_usr_cgj
             });
           }
         } else res.send(data);
@@ -94,15 +112,15 @@ exports.update = (req, res) => {
 
 // Delete a UsuarioCGJ with the specified UsuarioCGJId in the request
 exports.delete = (req, res) => {
-    UsuarioCGj.remove(req.params.usuario-cgj-id, (err, data) => {
+    UsuarioCGj.remove(req.query.id_usr_cgj, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found UsuarioCGj with id ${req.params.usuario-cgj-id}.`
+            message: `Not found UsuarioCGj with id ${req.query.id_usr_cgj}.`
           });
         } else {
           res.status(500).send({
-            message: "Could not delete UsuarioCGj with id " + req.params.usuario-cgj-id
+            message: "Could not delete UsuarioCGj with id " + req.query.id_usr_cgj
           });
         }
       } else res.send({ message: `UsuarioCGj was deleted successfully!` });

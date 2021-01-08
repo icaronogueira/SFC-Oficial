@@ -3,6 +3,8 @@ import { Component, Inject, NgModule, OnInit } from '@angular/core';
 import { UsuarioCgjInterface } from 'src/app/interfaces/usuario-cgj-interface';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+import { IpService } from 'src/app/services/ip.service';
 
 
 @Component({
@@ -13,6 +15,8 @@ import { CommonModule } from '@angular/common';
 export class ConfigUsuariosCGJComponent implements OnInit {
 
   baseUrl = 'http://localhost:3000';
+
+  //json de configurações para o ng-smart-table
   settings = {
     actions: {
       custom: [
@@ -47,18 +51,30 @@ export class ConfigUsuariosCGJComponent implements OnInit {
     },
     add: {
       confirmCreate: true
+    },
+    edit: {
+      confirmSave: true
+    },
+    delete:{
+      confirmDelete: true
     }
   };
+
+  //array usuarios-cgj
+  data: any= [];
+  //usuario logado e endereco cliente ip
+  usuario: string="";
+  ipAdress:string="";
+
   
-  constructor(private http: HttpClient, private dialog: MatDialog) { 
+  constructor(private http: HttpClient, private dialog: MatDialog, private _auth: AuthService, private ip: IpService) { 
     
   }
 
 
-  data: any= [];
-
   ngOnInit(): void {
     
+    //Pega a lista de usuarios-cgj para inicializar a lista
     this.http.get<UsuarioCgjInterface[]>(`${this.baseUrl}/usuario-cgj`).subscribe(
         data => {
           this.data = data;
@@ -66,16 +82,25 @@ export class ConfigUsuariosCGJComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
+          alert("Client-side error occured.");
         } else {
-          console.log("Server-side error occured.");
+          alert("Server-side error occured.");
         }
       });
+    //------------------------------------------------------
 
+    //inicializa nome usuario e ip cliente
+    this.usuario = this._auth.getUserDetails() || "";
+    this.ip.getIpAdress().subscribe((res:any)=>{
+      this.ipAdress=res.ip;
+      console.log("meu ip = " + this.ipAdress);
+    });
+    
   }
 
-  onCustom(event: any) {  //mostra dialog com mais informações
 
+  //mostra dialog com mais informações
+  onCustom(event: any) {  
     event.data.dt_ult_entrada = event.data.dt_ult_entrada ? new Date(event.data.dt_ult_entrada) : null;
     event.data.dt_ult_saida = event.data.dt_ult_saida ? new Date(event.data.dt_ult_saida) : null;
     event.data.dt_inc = event.data.dt_inc ? new Date(event.data.dt_inc) : null;
@@ -88,31 +113,81 @@ export class ConfigUsuariosCGJComponent implements OnInit {
       });
     }
   }
+  //---------------------------------------
 
-  // addRecord(event:any) {
-  //   var data = {
-  //     "situacao": event.newData.situacao,
-  //     "id_usr_cgj_tjam": event.newData.id_usr_cgj_tjam,
-  //     "nome_usr": event.newData.nome_usr,
-  //     "qtde_entrada": 0,
-  //     "dt_ult_entrada": null,
-  //     "ip_ult_entrada": null,
-  //     "qtde_saida": 0,
-  //     "dt_ult_saida": null,
-  //     "ip_ult_saida": null,
-  //     "dt_inc": null,
-  //     "usr_inc": string,
-  //     "ip_inc": string,
-  //     "dt_alt": null,
-  //     "usr_alt": null,
-  //     "ip_alt": null,
-  //     "qtde_alt": 0,
-  //     "dt_ina": null,
-  //     "usr_ina": null,
-  //     "ip_ina": null 
-  //   }
+  //Cria novo usuario-cgj
+  addRecord(event:any) {
+    
+      let novoUsuarioCgj = {
+        "situacao": event.newData.situacao,
+        "id_usr_cgj_tjam": event.newData.id_usr_cgj_tjam,
+        "nome_usr": event.newData.nome_usr,
+        "qtde_saida": 0,
+        "usr_inc": this.usuario,
+        "ip_inc": this.ipAdress
+      }
+      //requisição para inserir usuario-cgj no banco
+      this.http.post<UsuarioCgjInterface>(`${this.baseUrl}/usuario-cgj`, novoUsuarioCgj).subscribe(
+        res => {
+          console.log(res);
+          event.confirm.resolve(event.newData);
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            alert("Cliente-side error occured");
+          } else {
+            alert("Server-side error occured");
+          }
+        }
+      );
 
-  // }
+  }
+
+  //Edita valores
+  updateRecord(event:any) {
+    console.log(event);
+    let editUsuarioCgj = {
+      "situacao": event.newData.situacao,
+      "id_usr_cgj_tjam": event.newData.id_usr_cgj_tjam,
+      "nome_usr": event.newData.nome_usr,
+      "usr_alt": this.usuario,
+      "ip_alt": this.ipAdress
+    }
+    this.http.put<UsuarioCgjInterface>(`${this.baseUrl}/usuario-cgj?id_usr_cgj=`+event.data.id_usr_cgj, editUsuarioCgj).subscribe(
+      res => {
+        console.log(res);
+        event.confirm.resolve(event.newData);
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          alert("Erro na aplicação.");
+        } else {
+          alert("Erro no servidor.");
+        }
+      });
+  }
+
+  //deleta usuario-cgj
+  deleteRecord(event: any) {
+    console.log("event.data = " + JSON.stringify(event.data));
+    this.http.delete<any>(`${this.baseUrl}/usuario-cgj?id_usr_cgj=`+event.data.id_usr_cgj).subscribe(
+      res => {
+        console.log(res);
+        event.confirm.resolve(event.source.data);
+    },
+    (err: HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        alert("Client-side error occured.");
+      } else {
+        alert("Server-side error occured.");
+      }
+    });
+  }
+  //-------------------
+
+
+
+
 
 }
 

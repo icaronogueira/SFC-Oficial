@@ -5,6 +5,19 @@ const UsuarioCgj = function(usuarioCgj) {
   this.id_usr_cgj_tjam = usuarioCgj.id_usr_cgj_tjam;
   this.nome_usr = usuarioCgj.nome_usr;
   this.situacao = usuarioCgj.situacao;
+  this.qtde_entrada = usuarioCgj.qtde_entrada;
+  this.dt_ult_entrada = usuarioCgj.dt_ult_entrada;
+  this.ip_ult_entrada = usuarioCgj.ip_ult_entrada;
+  this.qtde_saida = usuarioCgj.qtde_saida;
+  this.dt_ult_saida = usuarioCgj.dt_ult_saida;
+  this.ip_ult_saida = usuarioCgj.ip_ult_saida;
+  this.dt_inc = usuarioCgj.dt_inc;
+  this.usr_inc = usuarioCgj.usr_inc;
+  this.ip_inc = usuarioCgj.ip_inc;
+  this.qtde_alt = usuarioCgj.qtde_alt;
+  this.dt_ina = usuarioCgj.dt_ina;
+  this.usr_ina = usuarioCgj.usr_ina;
+  this.ip_ina = usuarioCgj.ip_ina;
 };
 
 UsuarioCgj.create = (newUsuarioCgj, result) => {
@@ -52,10 +65,10 @@ UsuarioCgj.getAll = result => {
   });
 };
 
-UsuarioCgj.updateById = (id, field, value, result) => {
+UsuarioCgj.updateById = (id, values, result) => {
   sql.query(
-    "UPDATE usuarios_cgj SET ? = ? WHERE id_usr_cgj_tjam = ?",
-    [field, value, id],
+    "UPDATE usuarios_cgj SET ?, qtde_alt=qtde_alt+1 WHERE id_usr_cgj = ?", //incrementar qtde_alt
+    [values, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -76,7 +89,8 @@ UsuarioCgj.updateById = (id, field, value, result) => {
 };
 
 UsuarioCgj.remove = (id, result) => {
-  sql.query("DELETE FROM usuarios_cgj WHERE id_usr_cgj_tjam = ?", id, (err, res) => {
+  console.log("id="+id);
+  sql.query("DELETE FROM usuarios_cgj WHERE id_usr_cgj = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
