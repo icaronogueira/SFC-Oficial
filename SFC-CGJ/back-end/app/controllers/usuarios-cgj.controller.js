@@ -50,15 +50,32 @@ exports.findAll = (req, res) => {
 
 // Find a single UsuarioCGJ with a UsuarioCGJId
 exports.findOne = (req, res) => {
-    UsuarioCGj.findById(req.params.usuario-cgj-id, (err, data) => {
+    UsuarioCGj.findById(req.query.id_usr_cgj_tjam, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found UsuarioCGj with id ${req.params.usuario-cgj-id}.`
+            message: `Not found UsuarioCGj with id ${req.query.id_usr_cgj_tjam}.`
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving UsuarioCGj with id " + req.params.usuario-cgj-id
+            message: "Error retrieving UsuarioCGj with id " + req.query.id_usr_cgj_tjam
+          });
+        }
+      } else res.send(data);
+    });
+  };
+
+  // Find a single UsuarioCGJ with a UsuarioCGJId and increments 
+exports.findOneLog = (req, res) => {
+    UsuarioCGj.findByIdLogin(req.query.id_usr_cgj_tjam,req.query.ip,moment().format('YYYY-MM-DD hh:mm:ss'), (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found UsuarioCGj with id ${req.query.id_usr_cgj_tjam}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving UsuarioCGj with id " + req.query.id_usr_cgj_tjam
           });
         }
       } else res.send(data);
@@ -74,15 +91,6 @@ exports.update = (req, res) => {
       });
     }
 
-    //editing a UsuarioCGJ
-    // const editUsuarioCGJ = new UsuarioCGj({
-    //   situacao : req.body.situacao,
-    //   id_usr_cgj_tjam : req.body.id_usr_cgj_tjam,
-    //   nome_usr : req.body.nome_usr,
-    //   dt_alt : moment().format('YYYY-MM-DD hh:mm:ss'),
-    //   usr_alt : req.body.usr_inc,
-    //   ip_alt : req.body.ip_inc,
-    // });
   
     UsuarioCGj.updateById(
       req.query.id_usr_cgj,
@@ -109,6 +117,32 @@ exports.update = (req, res) => {
       }
     );
   };
+
+
+  // Update a UsuarioCGJ identified by the UsuarioCGJId in the request
+exports.updateLogout = (req, res) => {
+
+  UsuarioCGj.updateByIdLogout(
+    req.query.id_usr_cgj,
+    {
+      dt_ult_saida : moment().format('YYYY-MM-DD hh:mm:ss'),
+      ip_ult_saida : req.query.ip
+    },
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found UsuarioCGj with id ${req.query.id_usr_cgj}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating UsuarioCGj with id " + req.query.id_usr_cgj
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
 
 // Delete a UsuarioCGJ with the specified UsuarioCGJId in the request
 exports.delete = (req, res) => {

@@ -34,7 +34,9 @@ UsuarioCgj.create = (newUsuarioCgj, result) => {
 };
 
 UsuarioCgj.findById = (UsuarioCgjId, result) => {
-  sql.query(`SELECT * FROM usuarios-cgj WHERE id_usr_cgj_tjam = ${UsuarioCgjId}`, (err, res) => {
+  UsuarioCgjId=String(UsuarioCgjId)
+  UsuarioCgjId = UsuarioCgjId.includes("@") ? UsuarioCgjId : UsuarioCgjId+"@tjam.jus.br";
+  sql.query("SELECT * FROM usuarios_cgj WHERE id_usr_cgj_tjam=?",[UsuarioCgjId], (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -52,6 +54,55 @@ UsuarioCgj.findById = (UsuarioCgjId, result) => {
   });
 };
 
+UsuarioCgj.findByIdLogin = (UsuarioCgjId, ip, moment,result) => {
+  UsuarioCgjId=String(UsuarioCgjId)
+  UsuarioCgjId = UsuarioCgjId.includes("@") ? UsuarioCgjId : UsuarioCgjId+"@tjam.jus.br";
+
+  //ip
+
+  sql.query(
+    "UPDATE usuarios_cgj SET qtde_entrada=qtde_entrada+1,dt_ult_entrada=?,ip_ult_entrada=? WHERE id_usr_cgj_tjam = ?", //incrementar qtde_alt
+    [moment,ip,UsuarioCgjId],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        // result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found UsuarioCgj with the id
+        // result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("updated UsuarioCgj: ", { ...UsuarioCgj });
+      // result(null, {...UsuarioCgj });
+    }
+  );
+
+
+  sql.query("SELECT * FROM usuarios_cgj WHERE id_usr_cgj_tjam=?",[UsuarioCgjId], (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found UsuarioCgj: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+
+    // not found UsuarioCgj with the id
+    result({ kind: "not_found" }, null);
+  });
+};
+
+
+
+
 UsuarioCgj.getAll = result => {
   sql.query("SELECT * FROM usuarios_cgj", (err, res) => {
     if (err) {
@@ -66,8 +117,37 @@ UsuarioCgj.getAll = result => {
 };
 
 UsuarioCgj.updateById = (id, values, result) => {
+  console.log(values);
+  if (values["situacao"]=='I') {
+    values["dt_ina"]=values["dt_alt"];
+    values["usr_ina"]=values["usr_alt"];
+    values["ip_ina"]=values["ip_alt"];
+  }
   sql.query(
     "UPDATE usuarios_cgj SET ?, qtde_alt=qtde_alt+1 WHERE id_usr_cgj = ?", //incrementar qtde_alt
+    [values, id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found UsuarioCgj with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("updated UsuarioCgj: ", { id: id, ...UsuarioCgj });
+      result(null, { id: id, ...UsuarioCgj });
+    }
+  );
+};
+
+UsuarioCgj.updateByIdLogout = (id, values, result) => {
+  sql.query(
+    "UPDATE usuarios_cgj SET ?, qtde_saida=qtde_saida+1 WHERE id_usr_cgj = ?", //incrementar qtde_saida
     [values, id],
     (err, res) => {
       if (err) {

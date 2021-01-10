@@ -8,10 +8,14 @@ module.exports = app => {
     app.get("/usuario-cgj", usuariosCgj.findAll);
   
     // Retrieve a single UsuarioCGj with UsuarioCGjId
-    app.get("/usuario-cgj/:usuario-cgj-id", usuariosCgj.findOne);
+    app.get("/login-usuario-cgj", usuariosCgj.findOneLog);
   
     // Update a UsuarioCGj with UsuarioCGjId
     app.put("/usuario-cgj", usuariosCgj.update);
+
+    // logout setting
+    app.put("/put-usuario-cgj-logout", usuariosCgj.updateLogout);
+
   
     // Delete a UsuarioCGj with UsuarioCGjId
     app.delete("/usuario-cgj", usuariosCgj.delete);

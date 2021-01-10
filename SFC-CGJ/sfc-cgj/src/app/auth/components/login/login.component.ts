@@ -3,6 +3,9 @@ import {NgForm} from '@angular/forms';
 import { ApiService } from './../../../services/api.service'
 import { AuthService } from './../../../services/auth.service'
 import { Router } from '@angular/router';
+import { UsuarioCgjInterface } from 'src/app/interfaces/usuario-cgj-interface';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { IpService } from 'src/app/services/ip.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +15,13 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   
-  isLogin: boolean = false; //depois mudar para false
+  isLogin: boolean = false; 
   errorMessage:string='';
+  baseUrl = 'http://localhost:3000';
+  ipAdress:any;
 
-  constructor( private _api: ApiService, private _auth: AuthService, private _router:Router) {
+  constructor( private _api: ApiService, private _auth: AuthService, private _router:Router, private http:HttpClient,
+      private ip:IpService) {
   }
 
   ngOnInit() {
@@ -27,10 +33,37 @@ export class LoginComponent implements OnInit {
     this._auth.setDataInLocalStorage('ano-corrente',anoAtual);
   }
 
+
+
+
+
+
   onSubmit(form: NgForm) {  //AJEITAR ESSE LOGIN
     console.log('Your form data : ', form.value);
-    this.isLogin=true;
-    this._auth.setDataInLocalStorage('userLogin',form.value.login);
+
+    this.ip.getIpAdress().subscribe((res:any)=>{
+
+          //Pega dados do usuasrio para salvar no LocalStorage - somente se identificado pelo ladp
+        this.http.get<UsuarioCgjInterface[]>(`${this.baseUrl}/login-usuario-cgj?id_usr_cgj_tjam=`+form.value.login+`&ip=`+res.ip).subscribe(
+          data => {
+            this._auth.setDataInLocalStorage('userData',JSON.stringify(data));
+            this.isLogin=true;
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            alert("Client-side error occured.");
+          } else {
+            alert("Server-side error occured.");
+          }
+        });
+      //-----------------------------------------------------
+
+    });
+
+    
+
+
+    
     // this._api.ldapRequest(form.value.email, form.value.password).subscribe((res: any) => {
     //    console.log(res)
     //     this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
@@ -42,6 +75,12 @@ export class LoginComponent implements OnInit {
     // });
   }
 
+
+
+
+
+
+  
   isUserLogin(){
     console.log(this._auth.getUserDetails())
     if(this._auth.getUserDetails() != null){
@@ -49,8 +88,9 @@ export class LoginComponent implements OnInit {
     }
     console.log(this.isLogin);
   }
-  logout(){
-    this._auth.clearStorage()
-    this._router.navigate(['']);
+  
+  logoutView($event:any){
+    this.isLogin=false;
   }
+
 }

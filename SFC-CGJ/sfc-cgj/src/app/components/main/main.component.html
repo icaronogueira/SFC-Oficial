@@ -9,46 +9,57 @@
         </ul>
     </div>
 </nav> -->
+<div>
+    <ul class="main-navigation" routerLinkActive="active">
+        <li><a>SFC - Módulo Administrativo</a></li>
+        <li>
+            <a href="#">Relatórios</a>
+            <ul>
+                <li><a routerLink="rel-pend-obg-evento">Pendentes Obrigação Evento</a></li>
+                <li><a routerLink="rel-pend-obg-periodo">Pendentes Obrigação Período</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Operação</a>
+            <ul>
+                <li><a routerLink="op-inspeciona-obrigacao">Inspeciona Obrigação</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Manutenção</a>
+            <ul>
+                <li><a routerLink="man-cartorios">Cartórios</a></li>
+                <li><a routerLink="man-obrigacoes">Obrigações</a></li>
+                <li><a routerLink="man-oficiais">Oficiais</a></li>
+                <li><a routerLink="man-cancela-evento-obrigacao">Cancela Evento de Obrigação</a></li>
+                <li><a routerLink="man-associa-oficiais-cartorios">Associa Oficiais -> Cartórios</a></li>
+                <li><a routerLink="man-associa-obrigacoes-cartorios">Associa Obrigações -> Cartórios</a></li>
+                <li><a routerLink="man-inclui-obrigacoes-anuais">Inclui Obrigações Anuais (1 ou todos)</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Configuração</a>
+            <ul>
+                <li><a routerLink="config-usuarios-cgj">Usuários CGJ</a></li>
+                <li><a routerLink="config-email-evento-validado">E-mail Evento Validado</a></li>
+                <li><a routerLink="config-email-evento-rejeitado">E-mail Evento Rejeitado</a></li>
+                <li><a routerLink="config-configura-ano-corrente">Configura Ano Corrente</a></li>
+                <li><a routerLink="config-log-recupera-senha">Log Recupera Senha</a></li>
+            </ul>
+        </li>
 
-<ul class="main-navigation" routerLinkActive="active">
-    <li><a>SFC - Módulo Administrativo</a></li>
-    <li>
-        <a href="#">Relatórios</a>
-        <ul>
-            <li><a routerLink="rel-pend-obg-evento">Pendentes Obrigação Evento</a></li>
-            <li><a routerLink="rel-pend-obg-periodo">Pendentes Obrigação Período</a></li>
-        </ul>
-    </li>
-    <li>
-        <a href="#">Operação</a>
-        <ul>
-            <li><a routerLink="op-inspeciona-obrigacao">Inspeciona Obrigação</a></li>
-        </ul>
-    </li>
-    <li>
-        <a href="#">Manutenção</a>
-        <ul>
-            <li><a routerLink="man-cartorios">Cartórios</a></li>
-            <li><a routerLink="man-obrigacoes">Obrigações</a></li>
-            <li><a routerLink="man-oficiais">Oficiais</a></li>
-            <li><a routerLink="man-cancela-evento-obrigacao">Cancela Evento de Obrigação</a></li>
-            <li><a routerLink="man-associa-oficiais-cartorios">Associa Oficiais -> Cartórios</a></li>
-            <li><a routerLink="man-associa-obrigacoes-cartorios">Associa Obrigações -> Cartórios</a></li>
-            <li><a routerLink="man-inclui-obrigacoes-anuais">Inclui Obrigações Anuais (1 ou todos)</a></li>
-        </ul>
-    </li>
-    <li>
-        <a href="#">Configuração</a>
-        <ul>
-            <li><a routerLink="config-usuarios-cgj">Usuários CGJ</a></li>
-            <li><a routerLink="config-email-evento-validado">E-mail Evento Validado</a></li>
-            <li><a routerLink="config-email-evento-rejeitado">E-mail Evento Rejeitado</a></li>
-            <li><a routerLink="config-configura-ano-corrente">Configura Ano Corrente</a></li>
-            <li><a routerLink="config-log-recupera-senha">Log Recupera Senha</a></li>
-        </ul>
-    </li>
+            
+        
+
+    </ul>
+    <div class="nav-direita">
+        <a class="texto-log-grande">Bem-vindo, {{nome_usuario}}</a> - 
+        <a class="texto-log-pequeno">{{num_acessos}} acessos</a> - 
+        <a class="texto-log-pequeno">Último acesso: {{dt_ult_acesso | date:'dd/MM/yyy - hh:mm'}}</a> - 
+        <a class="texto-log-pequeno" (click)="logout()">Sair</a>
+       
+    </div>
     
-</ul>
-
+</div>
 
 <router-outlet></router-outlet>

@@ -63,7 +63,8 @@ export class ConfigUsuariosCGJComponent implements OnInit {
   //array usuarios-cgj
   data: any= [];
   //usuario logado e endereco cliente ip
-  usuario: string="";
+  usuarioData: any;
+  usuario:string=""
   ipAdress:string="";
 
   
@@ -90,7 +91,8 @@ export class ConfigUsuariosCGJComponent implements OnInit {
     //------------------------------------------------------
 
     //inicializa nome usuario e ip cliente
-    this.usuario = this._auth.getUserDetails() || "";
+    this.usuarioData =  this._auth.getUserDetails();
+    this.usuario = this.usuarioData["nome_usr"];
     this.ip.getIpAdress().subscribe((res:any)=>{
       this.ipAdress=res.ip;
       console.log("meu ip = " + this.ipAdress);
@@ -123,7 +125,7 @@ export class ConfigUsuariosCGJComponent implements OnInit {
         "id_usr_cgj_tjam": event.newData.id_usr_cgj_tjam,
         "nome_usr": event.newData.nome_usr,
         "qtde_saida": 0,
-        "usr_inc": this.usuario,
+        "usr_inc": this.usuarioData["id_usr_cgj_tjam"],
         "ip_inc": this.ipAdress
       }
       //requisição para inserir usuario-cgj no banco
@@ -150,7 +152,7 @@ export class ConfigUsuariosCGJComponent implements OnInit {
       "situacao": event.newData.situacao,
       "id_usr_cgj_tjam": event.newData.id_usr_cgj_tjam,
       "nome_usr": event.newData.nome_usr,
-      "usr_alt": this.usuario,
+      "usr_alt": this.usuarioData["id_usr_cgj_tjam"],
       "ip_alt": this.ipAdress
     }
     this.http.put<UsuarioCgjInterface>(`${this.baseUrl}/usuario-cgj?id_usr_cgj=`+event.data.id_usr_cgj, editUsuarioCgj).subscribe(

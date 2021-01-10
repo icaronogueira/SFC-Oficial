@@ -10,6 +10,7 @@ ul li {
     position: relative;
     float: left;
     background: #1bc2a2;
+    font-size: 18px;
 }
 
 li ul {
@@ -63,3 +64,13 @@ ul:before, ul:after {
 ul:after { clear:both;}
 
 
+.nav-direita {
+    text-align: right;
+}
+
+.texto-log-grande {
+    font-size: 13px;
+}
+.texto-log-pequeno {
+    font-size: 11px;
+}
