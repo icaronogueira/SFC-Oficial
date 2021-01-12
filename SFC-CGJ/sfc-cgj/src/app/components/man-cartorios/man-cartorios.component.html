@@ -1,1 +1,96 @@
-<p>man-cartorios works!</p>
+<h2>Gerenciar Cartórios</h2>
+<ng2-smart-table [settings]="settings" [source]="data" (custom)="onCustom($event)" (deleteConfirm)="deleteRecord($event)"></ng2-smart-table>
+
+<button class="margin" (click)="showFormCriar()">Criar novo Cartório</button>
+
+<div *ngIf="mostraForm">
+    <p class="h4 mb-4">{{labelCriarEditar}}</p>
+    <form  #criaEditaForm="ngForm" (ngSubmit)="criarNovoCartorio(criaEditaForm.value)" class="text-center border border-light p-5">
+        <table>
+            <tr>
+                <td>
+                    <!-- Nome -->
+                    <label>Nome: <input type="text" id="nome_cartorio" class="form-control mb-4"></label>
+                </td>
+                <td>
+                    <!-- CPNJ -->
+                    <label>CNPJ: <input type="text" id="cpnj_cartorio" class="form-control mb-4" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00"></label>
+                </td>
+                <td>
+                    <!-- Situação -->
+                    <label>Situação:
+                        <select id="situacao" class="browser-default custom-select mb-4">
+                            <option value="A" selected>Ativo</option>
+                            <option value="I">Inativo</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <!-- Provimento -->
+                    <label>Provimento:
+                        <select id="provimento" class="browser-default custom-select mb-4">
+                            <option value="P" selected>Provido</option>
+                            <option value="I">Interino</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <!-- Data do provimento -->
+                    <label>Data do Provimento:
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                   name="data_provimento" id="data_provimento" [(ngModel)]="modelDbPicker" ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">...</button>
+                            </div>
+                          </div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- CPF do Oficial--> 
+                    <label>Oficial:
+                        <select id="cpf_oficial" class="browser-default custom-select mb-4">
+                            <option value="">-</option>
+                            <option value="oficial.cpf_oficial" *ngFor="let oficial of cpfNomeOficiais">
+                                {{oficial.nome_oficial}} ({{oficial.cpf_oficial}})
+                            </option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <!-- Capital ou Iterior -->
+                    <label>Capital/Interior:
+                        <select id="cap_int" class="browser-default custom-select mb-4">
+                            <option value="C" selected>Capital</option>
+                            <option value="I">Interior</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <!-- Endereço -->
+                    <label>Endereço: <input type="text" id="endereco" class="form-control mb-4"></label>
+                </td>
+                <td>
+                    <!-- Número -->
+                    <label>Número: <input type="text" id="num" class="form-control mb-4"></label>
+                </td>
+                <td>
+                    <!-- Bairro -->
+                    <label>Bairro: <input type="text" id="bairro" class="form-control mb-4"></label>
+                </td>
+                <td>
+                    <!-- CEP -->
+                    <label>CEP: <input type="text" id="cep" class="form-control mb-4" placeholder="00.000-00" mask="00.000-00"></label>
+                </td>
+                <td>
+                    <!-- Cidade -->
+                    <label>Cidade: <input type="text" id="cidade" class="form-control mb-4"></label>
+                </td>
+            </tr>
+        </table>
+        <button color="info" block="true" type="submit">Salvar</button>
+    </form>
+</div>
+   

@@ -14,6 +14,9 @@ app.get("/", (req, res) => {
 
 require("./app/routes/usuarios-cjg.routes.js")(app);
 require("./app/routes/modelo-email.routes.js")(app);
+require("./app/routes/cartorios.routes.js")(app);
+require("./app/routes/oficiais.routes.js")(app);
+
 
 
 app.listen(3000, () => {

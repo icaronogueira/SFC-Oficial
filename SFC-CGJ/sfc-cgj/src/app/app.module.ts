@@ -30,7 +30,11 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { EmailEditorModule } from 'angular-email-editor';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -65,7 +69,8 @@ import { EmailEditorModule } from 'angular-email-editor';
     NgbModule,
     Ng2SmartTableModule,
     MatDialogModule,
-    EmailEditorModule
+    EmailEditorModule,
+    NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
