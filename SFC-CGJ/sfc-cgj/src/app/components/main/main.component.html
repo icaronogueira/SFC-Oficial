@@ -1,14 +1,4 @@
-<!-- <nav class="navbar navbar-fixed-top">
-    <div class="container">
-        <a class="navbar-brand">sfc - módulo administrativo</a>
-        <ul class="nav navbar-nav" routerLinkActive="active">
-            <li class="nav-item"><a class="nav-link" routerLink="relatorios">Relatórios</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="operacao">Operação</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="manutencao">Manutenção</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="configuracao">Configuração</a></li>
-        </ul>
-    </div>
-</nav> -->
+
 <div>
     <ul class="main-navigation" routerLinkActive="active">
         <li><a>SFC - Módulo Administrativo</a></li>
@@ -28,7 +18,14 @@
         <li>
             <a href="#">Manutenção</a>
             <ul>
-                <li><a routerLink="man-cartorios">Cartórios</a></li>
+                <li>
+                    <a href="#">Cartórios</a>
+                    <ul>
+                        <li><a routerLink="man-incluir-cartorios">Incluir Cartórios</a></li>
+                        <li><a routerLink="man-consultar-editar-cartorios">Consultar/Editar Cartórios</a></li>
+                    </ul>
+                    
+                </li>
                 <li><a routerLink="man-obrigacoes">Obrigações</a></li>
                 <li><a routerLink="man-oficiais">Oficiais</a></li>
                 <li><a routerLink="man-cancela-evento-obrigacao">Cancela Evento de Obrigação</a></li>

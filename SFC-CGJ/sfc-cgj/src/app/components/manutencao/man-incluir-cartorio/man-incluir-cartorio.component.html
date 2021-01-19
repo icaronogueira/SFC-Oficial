@@ -1,0 +1,64 @@
+<h2>Manutenção - Cartórios - Incluir</h2>
+
+<div>
+    <form  #criaEditaForm="ngForm" (ngSubmit)="criarNovoCartorio(criaEditaForm.value)" class="text-center border border-light p-5">
+        <table>
+            <tr>
+                <td>
+                    <!-- CPNJ -->
+                    <label>CNPJ do cartório <input type="text" id="cpnj_cartorio" class="form-control mb-4" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00"></label>
+                </td>
+                <td colspan=3>
+                    <!-- Nome -->
+                    <label>Nome do cartório <input type="text" id="nome_cartorio" class="form-control mb-4" size="25"></label>
+                </td>
+            </tr>
+            <tr>
+                <td width="25%">
+                    <label>Situação <input type="text" class="form-control mb-4" placeholder="Ativo" readonly="readonly"></label>
+                </td>
+                <td width="25%">
+                    <label>Provido/Interino <input type="text" class="form-control mb-4" readonly="readonly" title="Preenchido pela opção Associa Oficiais -> Cartórios"></label>
+                </td>
+                <td width="25%">
+                    <label>Data Provimento <input type="text" class="form-control mb-4" readonly="readonly" title="Preenchido pela opção Associa Oficiais -> Cartórios"></label>
+                </td>
+                <td width="25%">
+                    <label>CPF do Oficial <input type="text" class="form-control mb-4" readonly="readonly" title="Preenchido pela opção Associa Oficiais -> Cartórios"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Capital/Interior:
+                        <select id="cap_int" class="browser-default custom-select mb-4">
+                            <option value="C" selected>Capital</option>
+                            <option value="I">Interior</option>
+                        </select>
+                    </label>
+                </td>
+                <td colspan=3>
+                    <label>Endereço: <input type="text" id="endereco" class="form-control mb-4"></label>
+                </td>
+            </tr>
+            <tr>
+                <td width="25%">
+                    <label>Número <input type="text" id="num" class="form-control mb-4" placeholder="Ativo"></label>
+                </td>
+                <td width="25%">
+                    <label>Bairro <input type="text" id="bairro" class="form-control mb-4"></label>
+                </td>
+                <td width="25%">
+                    <label>CEP <input type="text" id="cep" placeholder="00.000-00" mask="00.000-00" class="form-control mb-4"></label>
+                </td>
+                <td width="25%">
+                    <label>Cidade:
+                        <select id="cidade" class="browser-default custom-select mb-4">
+                            <option *ngFor="let cidade of cidadesAmazonas" value="cidade">{{cidade}}</option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+        </table>
+        <button color="info" block="true" type="submit">Salvar</button>
+    </form>
+</div>
