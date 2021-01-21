@@ -1,11 +1,13 @@
 table {
     margin: 0;
     width: 80%;
+    table-layout: fixed;
     margin-left: auto;
     margin-right: auto;
 }
-td {
+tr td {
     padding-right: 10px;
+    width: 25%;
 }
 
 label {
@@ -14,4 +16,8 @@ label {
 
 label {
     text-align: left;
+}
+
+button {
+    margin-right: 10px;
 }

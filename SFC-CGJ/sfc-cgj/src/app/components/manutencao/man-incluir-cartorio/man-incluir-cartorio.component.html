@@ -1,64 +1,96 @@
 <h2>Manutenção - Cartórios - Incluir</h2>
 
 <div>
-    <form  #criaEditaForm="ngForm" (ngSubmit)="criarNovoCartorio(criaEditaForm.value)" class="text-center border border-light p-5">
+    <form  #incluiForm="ngForm" (ngSubmit)="criarNovoCartorio(incluiForm)" class="text-center border border-light p-5">
         <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
             <tr>
                 <td>
                     <!-- CPNJ -->
-                    <label>CNPJ do cartório <input type="text" id="cpnj_cartorio" class="form-control mb-4" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00"></label>
+                    <label>CNPJ do cartório <input ngModel type="text" id="cpnj_cartorio" name="cpnj_cartorio" class="form-control mb-4" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00" required></label>
                 </td>
-                <td colspan=3>
+                <td colspan="3">
                     <!-- Nome -->
-                    <label>Nome do cartório <input type="text" id="nome_cartorio" class="form-control mb-4" size="25"></label>
+                    <label>Nome do cartório <input ngModel type="text" id="nome_cartorio" name="nome_cartorio" class="form-control mb-4" size="25" required></label>
                 </td>
             </tr>
             <tr>
-                <td width="25%">
-                    <label>Situação <input type="text" class="form-control mb-4" placeholder="Ativo" readonly="readonly"></label>
+                <td>
+                    <label>Situação <input ngModel id="situacao" name="situacao" type="text" class="form-control mb-4" placeholder="Ativo" value="A" readonly="readonly"></label>
                 </td>
-                <td width="25%">
+                <td>
                     <label>Provido/Interino <input type="text" class="form-control mb-4" readonly="readonly" title="Preenchido pela opção Associa Oficiais -> Cartórios"></label>
                 </td>
-                <td width="25%">
+                <td>
                     <label>Data Provimento <input type="text" class="form-control mb-4" readonly="readonly" title="Preenchido pela opção Associa Oficiais -> Cartórios"></label>
                 </td>
-                <td width="25%">
+                <td>
                     <label>CPF do Oficial <input type="text" class="form-control mb-4" readonly="readonly" title="Preenchido pela opção Associa Oficiais -> Cartórios"></label>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Capital/Interior:
-                        <select id="cap_int" class="browser-default custom-select mb-4">
+                        <select ngModel id="cap_int" name="cap_int" class="browser-default custom-select mb-4" required>
                             <option value="C" selected>Capital</option>
                             <option value="I">Interior</option>
                         </select>
                     </label>
                 </td>
-                <td colspan=3>
-                    <label>Endereço: <input type="text" id="endereco" class="form-control mb-4"></label>
+                <td colspan="3">
+                    <label>Endereço: <input ngModel type="text" id="endereco" name="endereco" class="form-control mb-4" required></label>
                 </td>
             </tr>
             <tr>
-                <td width="25%">
-                    <label>Número <input type="text" id="num" class="form-control mb-4" placeholder="Ativo"></label>
+                <td>
+                    <label>Número <input ngModel name="num" required type="text" id="num" class="form-control mb-4" placeholder="Ativo"></label>
                 </td>
-                <td width="25%">
-                    <label>Bairro <input type="text" id="bairro" class="form-control mb-4"></label>
+                <td>
+                    <label>Bairro <input ngModel name="bairro" required type="text" id="bairro" class="form-control mb-4"></label>
                 </td>
-                <td width="25%">
-                    <label>CEP <input type="text" id="cep" placeholder="00.000-00" mask="00.000-00" class="form-control mb-4"></label>
+                <td>
+                    <label>CEP <input ngModel name="cep" required type="text" id="cep" placeholder="00.000-00" mask="00.000-00" class="form-control mb-4"></label>
                 </td>
-                <td width="25%">
+                <td>
                     <label>Cidade:
-                        <select id="cidade" class="browser-default custom-select mb-4">
+                        <select ngModel id="cidade" name="cidade" required class="browser-default custom-select mb-4">
                             <option *ngFor="let cidade of cidadesAmazonas" value="cidade">{{cidade}}</option>
                         </select>
                     </label>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Email principal <input ngModel name="e_mail_principal" required type="email" id="e_mail_principal" class="form-control mb-4"></label>
+                </td>
+                <td>
+                    <label>Telefone 1 <input ngModel name="telefone1" required type="text" id="telefone1" class="form-control mb-4" mask="00-0000-0000"></label>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Email secundário <input ngModel name="e_mail_secundario" required type="e_mail_secundario" id="num" class="form-control mb-4"></label>
+                </td>
+                <td>
+                    <label>Telefone 2 <input ngModel name="telefone2" required type="text" id="telefone2" class="form-control mb-4" mask="00-0000-0000"></label>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Site do cartório <input ngModel name="site" required type="text" id="site" class="form-control mb-4"></label>
+                </td>
+                <td colspan="2"></td>
+            </tr>
         </table>
         <button color="info" block="true" type="submit">Salvar</button>
+        <button color="info" block="true" type="reset">Cancelar</button>
+        
     </form>
 </div>
