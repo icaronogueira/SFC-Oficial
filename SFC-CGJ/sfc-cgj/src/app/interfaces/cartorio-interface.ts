@@ -5,6 +5,7 @@ export interface CartorioInterface {
     situacao: string,
     provimento: string,
     data_provimento: any,
+    nome_oficial: string,
     cpf_oficial: string,
     cap_int: string,
     endereco: string,

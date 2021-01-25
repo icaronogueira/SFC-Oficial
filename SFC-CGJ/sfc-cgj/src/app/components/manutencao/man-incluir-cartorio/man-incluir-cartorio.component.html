@@ -2,6 +2,7 @@
 
 <div>
     <form  #incluiForm="ngForm" (ngSubmit)="criarNovoCartorio(incluiForm)" class="text-center border border-light p-5">
+        <div class="left">(*) Dados obrigatórios.</div>
         <table>
             <tr>
                 <th></th>
@@ -12,11 +13,11 @@
             <tr>
                 <td>
                     <!-- CPNJ -->
-                    <label>CNPJ do cartório <input ngModel type="text" id="cpnj_cartorio" name="cpnj_cartorio" class="form-control mb-4" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00" required></label>
+                    <label>CNPJ do cartório* <input ngModel type="text" id="cnpj_cartorio" name="cnpj_cartorio" class="form-control mb-4" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00" required></label>
                 </td>
                 <td colspan="3">
                     <!-- Nome -->
-                    <label>Nome do cartório <input ngModel type="text" id="nome_cartorio" name="nome_cartorio" class="form-control mb-4" size="25" required></label>
+                    <label>Nome do cartório* <input ngModel type="text" id="nome_cartorio" name="nome_cartorio" class="form-control mb-4" size="25" required></label>
                 </td>
             </tr>
             <tr>
@@ -35,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <label>Capital/Interior:
+                    <label>Capital/Interior*:
                         <select ngModel id="cap_int" name="cap_int" class="browser-default custom-select mb-4" required>
                             <option value="C" selected>Capital</option>
                             <option value="I">Interior</option>
@@ -48,18 +49,18 @@
             </tr>
             <tr>
                 <td>
-                    <label>Número <input ngModel name="num" required type="text" id="num" class="form-control mb-4" placeholder="Ativo"></label>
+                    <label>Número <input ngModel name="num" required type="text" id="num" class="form-control mb-4"></label>
                 </td>
                 <td>
                     <label>Bairro <input ngModel name="bairro" required type="text" id="bairro" class="form-control mb-4"></label>
                 </td>
                 <td>
-                    <label>CEP <input ngModel name="cep" required type="text" id="cep" placeholder="00.000-00" mask="00.000-00" class="form-control mb-4"></label>
+                    <label>CEP <input ngModel name="cep" required type="text" id="cep" placeholder="00.000-000" mask="00.000-000" class="form-control mb-4"></label>
                 </td>
                 <td>
                     <label>Cidade:
                         <select ngModel id="cidade" name="cidade" required class="browser-default custom-select mb-4">
-                            <option *ngFor="let cidade of cidadesAmazonas" value="cidade">{{cidade}}</option>
+                            <option *ngFor="let cidade of cidadesAmazonas" value={{cidade}}>{{cidade}}</option>
                         </select>
                     </label>
                 </td>
@@ -69,7 +70,7 @@
                     <label>Email principal <input ngModel name="e_mail_principal" required type="email" id="e_mail_principal" class="form-control mb-4"></label>
                 </td>
                 <td>
-                    <label>Telefone 1 <input ngModel name="telefone1" required type="text" id="telefone1" class="form-control mb-4" mask="00-0000-0000"></label>
+                    <label>Telefone 1 <input ngModel name="telefone1" required type="text" id="telefone1" class="form-control mb-4" mask="00-00000-0000"></label>
                 </td>
                 <td></td>
             </tr>
@@ -78,7 +79,7 @@
                     <label>Email secundário <input ngModel name="e_mail_secundario" required type="e_mail_secundario" id="num" class="form-control mb-4"></label>
                 </td>
                 <td>
-                    <label>Telefone 2 <input ngModel name="telefone2" required type="text" id="telefone2" class="form-control mb-4" mask="00-0000-0000"></label>
+                    <label>Telefone 2 <input ngModel name="telefone2" required type="text" id="telefone2" class="form-control mb-4" mask="00-00000-0000"></label>
                 </td>
                 <td></td>
             </tr>
@@ -89,8 +90,11 @@
                 <td colspan="2"></td>
             </tr>
         </table>
+        
+        <div class="alert alert-warning" *ngIf="showError">{{msgErro}}</div>
         <button color="info" block="true" type="submit">Salvar</button>
         <button color="info" block="true" type="reset">Cancelar</button>
         
     </form>
+
 </div>

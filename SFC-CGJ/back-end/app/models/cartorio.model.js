@@ -36,7 +36,7 @@ const Cartorio = function(cartorio) {
 
 //Pega todos os cartorios
 Cartorio.getAll = result => {
-  sql.query("SELECT * FROM cartorios", (err, res) => {
+  sql.query("SELECT cartorios.*, oficiais.nome_oficial FROM cartorios LEFT JOIN oficiais on cartorios.cpf_oficial=oficiais.cpf_oficial", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -51,6 +51,7 @@ Cartorio.getAll = result => {
 
 // Cria novo Cartorio --------------------------------
 Cartorio.create = (newCartorio, result) => {
+  console.log(newCartorio);
   sql.query("INSERT INTO cartorios SET ?", newCartorio, (err, res) => {
     if (err) {
       console.log("error: ", err);

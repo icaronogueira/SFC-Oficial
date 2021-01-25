@@ -1,1 +1,4 @@
-<p>man-consultar-editar-cartorio works!</p>
+<h2>Manutenção - Cartórios - Consultar/Alterar</h2>
+
+<ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+<div><h5>Clique no CNPJ para ver todos os dados.</h5></div>

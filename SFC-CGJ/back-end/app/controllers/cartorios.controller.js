@@ -31,14 +31,12 @@ exports.create = (req, res) => {
     // Create a UsuarioCGJ
     const novoCartorio = new Cartorio({
       dt_inc : moment().format('YYYY-MM-DD hh:mm:ss'),
+      nome_cartorio: req.body.nome_cartorio,
       qtde_alt:0,
       usr_inc: req.body.usr_inc,
       ip_inc: req.body.ip_inc,
       cnpj_cartorio: req.body.cnpj_cartorio,
-      situacao: req.body.situacao,
-      provimento: req.body.provimento,
-      data_provimento: req.body.data_provimento,
-      cpf_oficial: req.body.cpf_oficial,
+      situacao: "A",
       cap_int: req.body.cap_int,
       endereco: req.body.endereco,
       num: req.body.num,
